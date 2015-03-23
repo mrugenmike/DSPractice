@@ -129,7 +129,7 @@ private void printLevel(Node root,int level){
 	}
 
 	public void printIterativeInorder(){
-		System.out.println("**Non-Recursive**");
+		System.out.println("**Iterative Inorder**");
 		List<Integer> values = new ArrayList<Integer>();
 		Stack<Node> stack = new Stack<Node>();
 		Node current = root;
@@ -140,14 +140,32 @@ private void printLevel(Node root,int level){
 				current = current.left;
 			}else{
 				 Node n = stack.pop(); 
-				 values.add(n.data);
+				 System.out.print(n.data+", ");
 				 current = n.right;
 			}
 		}
-		for(Integer val:values){
-			System.out.print(val+", ");
+		 System.out.print("\n ");
+	}
+
+	public void printIterativePreOrder(){
+		if(root==null){
+			return;
 		}
-		System.out.print("\n");
+		System.out.println("**Iterative Pre-Order**");
+		Stack<Node> nodes = new Stack<Node>();
+		nodes.push(root);
+		
+		while(!nodes.isEmpty()){
+			Node node = nodes.pop();
+			System.out.print(node.data+", ");
+			if(node.right!=null){
+				nodes.push(node.right);
+			}
+			if(node.left!=null){
+				nodes.push(node.left);
+			}	
+		}
+
 	}
 }
 
@@ -171,5 +189,6 @@ public class Traversals{
 		tree.printAllLeafNodes();
 		tree.printAllNonLeafNodes();
 		tree.printIterativeInorder();
+		tree.printIterativePreOrder();
 	}
 }
